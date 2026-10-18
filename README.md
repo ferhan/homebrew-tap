@@ -1,7 +1,7 @@
-# FullContextLabs Homebrew tap
+# ferhan Homebrew tap
 
 ```
-brew install fullcontextlabs/tap/altero
+brew install ferhan/tap/altero
 ```
 
-Altero: https://github.com/FullContextLabs/Altero
+Altero: https://github.com/ferhan/Altero
