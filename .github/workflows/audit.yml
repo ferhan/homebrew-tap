@@ -12,18 +12,18 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 20
     steps:
-      # Taps this repository (at the PR merge commit) as fullcontextlabs/tap.
+      # Taps this repository (at the PR merge commit) as ferhan/tap.
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@eb02c69dbabdb66ff183c614f4ce7ab3c077592c # 2026.10.12.1
 
       - name: brew style
-        run: brew style fullcontextlabs/tap
+        run: brew style ferhan/tap
 
       - name: brew audit changed casks and formulae
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
-          cd "$(brew --repo fullcontextlabs/tap)"
+          cd "$(brew --repo ferhan/tap)"
           git fetch --quiet --depth=1 origin "$BASE_SHA"
           changed=$(git diff --name-only --diff-filter=AM "$BASE_SHA" HEAD -- 'Casks/*.rb' 'Formula/*.rb')
           if [ -z "$changed" ]; then
@@ -36,7 +36,7 @@ jobs:
               Casks/*) kind=--cask ;;
               Formula/*) kind=--formula ;;
             esac
-            echo "::group::brew audit $kind fullcontextlabs/tap/$name"
-            brew audit "$kind" --strict --online "fullcontextlabs/tap/$name"
+            echo "::group::brew audit $kind ferhan/tap/$name"
+            brew audit "$kind" --strict --online "ferhan/tap/$name"
             echo "::endgroup::"
           done
